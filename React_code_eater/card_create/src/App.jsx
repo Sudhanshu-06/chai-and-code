@@ -1,51 +1,30 @@
+import { useState } from "react";
 import "./App.css";
 import Card from "./Card";
 
 function App() {
-  const cards = [
-    {
-      id:1,
-      title: "Card 1",
-      content: "Content 1",
-    },
-    {
-      id:2,
-      title: "Card 2",
-      content: "Content 2",
-    },
-    {
-      id:3,
-      title: "Card 3",
-      content: "Content 3",
-    },
-    {
-      id:4,
-      title: "Card 4",
-      content: "Content 4",
-    },
-    {
-      id:5,
-      title: "Card 5",
-      content: "Content 5",
-    },
-  ];
+  const [cards, setCards] = useState([{title: "Card 1",content: "Content 1"}]);
+  
   const cardGenerator =()=>{
-    cards.push({title: "Card Title", content: "Content Title"})
-    console.log("card generated");
+    const newObject = {
+      title:`Card ${cards.length+1}`,
+      content:`Content ${cards.length+1}`,
+    }
+    setCards([...cards, newObject])
   }
   return (
     <>
+    <div className="app">
+    <button onClick={cardGenerator}>Card Generator</button>
       <div className="card-container">
-        
-          
-          {cards.map((card)=>{
+        {cards.map((card,index)=>{
             return(
-              <Card key={card.id} title={card.title} content={card.content} />
+              <Card key={index} title={card.title} content={card.content} />
             )
           })}
-        
+       </div> 
       </div>
-      <button onClick={cardGenerator}>Card Generator</button>
+      
     </>
   );
 }
